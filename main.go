@@ -2,24 +2,31 @@ package main
 
 import (
 	"fmt"
-	"golang-aula/structs"
+	"golang-aula/functions"
+	"time"
 )
 
 func main() {
-	array_sqrs := []structs.Square{
-		{
-			SideA: 1.5,
-			SideB: 3,
-		},
-		{
-			SideA: 3,
-			SideB: 3,
-		},
-	}
+	defer fmt.Println("terminou")
 
-	fmt.Println(SumArea(array_sqrs[0], array_sqrs[1]))
+	chanel := make(chan int)
+
+	go setIntenger(chanel, 100)
+
+	go printValues(chanel)
+
+	time.Sleep(10 * time.Second)
 }
 
-func SumArea(sqr1, sqr2 structs.Square) float32 {
-	return sqr1.GetArea() + sqr2.GetArea()
+func setIntenger(ch chan int, value int) {
+	ch <- value
+}
+
+func printValues(ch chan int) {
+	intenger := <-ch
+
+	go functions.PrintEven(intenger)
+	go functions.PrintOdd(intenger)
+
+	time.Sleep(10 * time.Second)
 }
