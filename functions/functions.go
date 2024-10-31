@@ -64,6 +64,9 @@ func PrintValueWaitGroup(wg *sync.WaitGroup, value string) {
 }
 
 func PrintEven(total int) {
+	defer fmt.Println("----------- Termino pares ----------")
+	fmt.Println("----------- Inicio pares ----------")
+
 	for i := 0; i < total; i += 2 {
 		fmt.Println(i)
 	}
@@ -71,6 +74,9 @@ func PrintEven(total int) {
 }
 
 func PrintOdd(total int) {
+
+	defer fmt.Println("----------- Termino impares ----------")
+	fmt.Println("----------- Inicio impares ----------")
 
 	for i := 1; i < total; i += 2 {
 		fmt.Println(i)
